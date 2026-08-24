@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-24T19:40:00+02:00",
+  "title": "Design System: RadarKit",
+  "extensions": {
+    "colorMeta": {
+      "signal-coral": { "role": "primary", "displayName": "Signal Coral", "canonical": "#e86443", "tonalRamp": ["#35150e", "#64291e", "#8b3928", "#ba4d34", "#d65a3d", "#e86443", "#ef987e", "#f8d6ca"] },
+      "signal-coral-deep": { "role": "primary-text", "displayName": "Signal Coral Deep", "canonical": "#ba4d34", "tonalRamp": ["#35150e", "#64291e", "#8b3928", "#ba4d34", "#d65a3d", "#e86443", "#ef987e", "#f8d6ca"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#eeeae2", "tonalRamp": ["#171716", "#393833", "#625f57", "#8d8980", "#b3afa6", "#d2cec4", "#e4e0d7", "#f7f5ef"] },
+      "surface": { "role": "neutral-surface", "displayName": "Surface", "canonical": "#f7f5ef", "tonalRamp": ["#171716", "#393833", "#625f57", "#8d8980", "#b3afa6", "#d2cec4", "#e4e0d7", "#f7f5ef"] },
+      "graphite": { "role": "neutral-ink", "displayName": "Graphite", "canonical": "#171716", "tonalRamp": ["#171716", "#2c2d2a", "#43443f", "#5c5d56", "#77776f", "#929087", "#c1beb5", "#eeeae2"] },
+      "line": { "role": "neutral-line", "displayName": "Hairline", "canonical": "#d2cec4", "tonalRamp": ["#393833", "#625f57", "#8d8980", "#b3afa6", "#d2cec4", "#e4e0d7", "#eeeae2", "#f7f5ef"] },
+      "line-strong": { "role": "neutral-line-strong", "displayName": "Strong Hairline", "canonical": "#bdb8ac", "tonalRamp": ["#393833", "#625f57", "#8d8980", "#b3afa6", "#d2cec4", "#e4e0d7", "#eeeae2", "#f7f5ef"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Cabinet Grotesk", "purpose": "Condensed editorial headlines and Signal titles." },
+      "body": { "displayName": "Satoshi", "purpose": "Calm reading copy and supporting UI text." },
+      "label": { "displayName": "IBM Plex Mono", "purpose": "Dates, counts, source state, and operational metadata." }
+    },
+    "shadows": [
+      { "name": "bench-offset", "value": "16px 18px 0 rgba(232, 100, 67, .18)", "purpose": "Physical tape offset beneath the live radar bench." },
+      { "name": "search-surface", "value": "0 22px 50px rgba(35, 31, 25, .08)", "purpose": "Ambient separation for the focused search surface." }
+    ],
+    "motion": [
+      { "name": "revealing-rows", "value": "cubic-bezier(.16, 1, .3, 1), 550ms", "purpose": "Staggered Signal rows enter via transform and opacity." },
+      { "name": "radar-sweep", "value": "linear, 6s infinite", "purpose": "The live instrument sweep loops continuously." },
+      { "name": "reduced-motion", "value": "prefers-reduced-motion", "purpose": "Stops decorative motion while preserving content and state." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "640px" },
+      { "name": "tablet", "value": "900px" }
+    ]
+  },
+  "components": [
+    { "name": "Primary Button", "kind": "button", "refersTo": "button-primary", "description": "The main action for opening the latest radar or visiting GitHub.", "html": "<button class=\"ds-btn-primary\">LATEST RADAR <span aria-hidden=\"true\">↗</span></button>", "css": ".ds-btn-primary { min-height: 45px; display: inline-flex; align-items: center; gap: 10px; padding: 0 18px; border: 1px solid #171716; border-radius: 0; background: #171716; color: #eeeae2; font: 700 12px Satoshi, sans-serif; transition: transform .2s ease, background .2s ease; } .ds-btn-primary:hover { background: #e86443; border-color: #e86443; } .ds-btn-primary:focus-visible { outline: 2px solid #e86443; outline-offset: 3px; } .ds-btn-primary:active { transform: translateY(1px) scale(.98); }" },
+    { "name": "Search Field", "kind": "input", "refersTo": "search-field", "description": "Text-first filtering for titles, topics, sources, and tags.", "html": "<label class=\"ds-input-search\"><span aria-hidden=\"true\">⌕</span><input placeholder=\"Search the radar\" /></label>", "css": ".ds-input-search { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border: 1px solid #d2cec4; background: #f7f5ef; color: #6d6a63; } .ds-input-search input { min-height: 34px; flex: 1; border: 0; outline: 0; background: transparent; color: #171716; font: 400 13px Satoshi, sans-serif; } .ds-input-search:focus-within { border-color: #e86443; outline: 2px solid rgba(232,100,67,.2); outline-offset: 2px; }" },
+    { "name": "Selection Rail", "kind": "nav", "refersTo": "cutting-bench-rail", "description": "The persistent navigation language for topics and archive cuts.", "html": "<nav class=\"ds-rail\"><a class=\"is-active\" href=\"#\">LATEST <span>06</span></a><a href=\"#\">AI <span>04</span></a><a href=\"#\">DEV <span>03</span></a></nav>", "css": ".ds-rail { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #171716; border-bottom: 1px solid #d2cec4; } .ds-rail a { display: flex; justify-content: space-between; padding: 20px 12px; border-right: 1px solid #d2cec4; color: #6d6a63; font: 700 11px IBM Plex Mono, monospace; } .ds-rail a.is-active { box-shadow: inset 0 -2px #e86443; color: #171716; background: #f7f5ef; } .ds-rail a:focus-visible { outline: 2px solid #e86443; outline-offset: -3px; } .ds-rail span { color: #929087; font-size: 9px; }" },
+    { "name": "Signal Row", "kind": "custom", "refersTo": "signal-row", "description": "A readable Signal frame with provenance, summary, tags, and relevance.", "html": "<article class=\"ds-signal-row\"><span class=\"ds-index\">01</span><div><small>AI / OPENAI / TODAY</small><h3>Small models find a new place on the edge ↗</h3><p>A compact description of the signal.</p></div><strong>86<small>score</small></strong></article>", "css": ".ds-signal-row { display: grid; grid-template-columns: 40px 1fr 44px; gap: 18px; padding: 22px 0; border-top: 1px solid #d2cec4; color: #171716; } .ds-signal-row small { color: #929087; font: 700 9px IBM Plex Mono, monospace; letter-spacing: .06em; } .ds-signal-row h3 { margin: 9px 0 6px; font: 800 24px/1 Cabinet Grotesk, sans-serif; letter-spacing: -.05em; } .ds-signal-row p { margin: 0; color: #6d6a63; font: 400 13px/1.5 Satoshi, sans-serif; } .ds-signal-row > strong { color: #ba4d34; font: 700 18px IBM Plex Mono, monospace; text-align: right; } .ds-signal-row > strong small { display: block; margin-top: 4px; font-size: 8px; }" }
+  ],
+  "narrative": {
+    "northStar": "The Cutting Bench Radar",
+    "overview": "RadarKit treats information as film on a workbench: every Signal is a frame, the rail is the reading order, and the orange tape mark shows where attention stopped. The experience is a reader first — editorial enough to reward staying, technical enough to make provenance and state visible.\n\nThe visual world is built from graphite, paper, hairline dividers, and one signal-coral accent. It is deliberately not a SaaS cockpit: no widget mosaic, neon atmosphere, decorative gradients, or ornamental glass. Motion is limited to the sweep of a live radar, a restrained reveal for rows, and tactile transforms on interaction.",
+    "keyCharacteristics": ["One continuous rail for navigation and filtering.", "Text-first Signals with source traceability.", "Paper/graphite light and dark scenes with the same geometry.", "Coral is a mark of activity, not a second palette."],
+    "rules": [
+      { "name": "The One Tape Rule", "body": "Coral is the only chromatic accent. Use it to show signal, selection, or action; never as ambient decoration.", "section": "colors" },
+      { "name": "The Signal-First Rule", "body": "Headlines carry the product voice; mono labels carry system state. Never make a small eyebrow do the work of a headline.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "A surface earns elevation only when it owns focus or needs to read as a physical instrument.", "section": "elevation" }
+    ],
+    "dos": ["Do keep the first viewport split and left-aligned.", "Do use source, topic, date, and score as real reading metadata.", "Do preserve the coral mark as a scarce state signal.", "Do keep motion transform/opacity-based and honor reduced motion.", "Do make desktop and mobile use the same rail grammar."],
+    "donts": ["Don't turn the reader into a widget dashboard.", "Don't add neon gradients, decorative glass, or a second accent color.", "Don't use rounded cards as the default container language.", "Don't hide source provenance behind a secondary interaction.", "Don't treat synthetic Signals as production data; label them until the radar has generated real Markdown."]
+  }
+}

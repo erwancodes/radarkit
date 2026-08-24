@@ -1,0 +1,7 @@
+node_modules
+dist
+.vinxi
+.tanstack
+.env
+.env.local
+coverage

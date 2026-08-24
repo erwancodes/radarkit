@@ -1,0 +1,39 @@
+name: Daily Radar
+
+on:
+  schedule:
+    # GitHub cron is UTC. Run at both possible UTC hours and let the script
+    # gate on Europe/Paris so daylight saving time still lands at 05:00.
+    - cron: '0 3,4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm radar -- --scheduled
+      - name: Commit new Signals
+        run: |
+          if git diff --quiet -- content/news; then
+            echo "No new Signals to commit."
+            exit 0
+          fi
+          git config user.name "radarkit-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/news
+          git commit -m "chore(radar): add daily signals $(date -u +%F)"
+          git push
