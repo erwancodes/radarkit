@@ -10,6 +10,7 @@
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "validate:news": "tsx scripts/validate-news.ts",
     "radar": "tsx scripts/run-radar.ts",
     "radar:now": "tsx scripts/run-radar.ts --now",
     "radar:dry-run": "tsx scripts/run-radar.ts --dry-run"

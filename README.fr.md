@@ -38,6 +38,8 @@ pnpm radar:now
 
 Le lecteur importe automatiquement les Markdown présents dans `content/news` au prochain build.
 
+Chaque news est bloquée si elle ne possède pas une `source` et un `sourceUrl` HTTP(S) vers l’article officiel. Le lien **Article officiel** est disponible directement dans la liste et sur la page de chaque signal.
+
 ## Commandes
 
 | Commande | Usage |
@@ -46,6 +48,7 @@ Le lecteur importe automatiquement les Markdown présents dans `content/news` au
 | `pnpm typecheck` | Vérifier TypeScript |
 | `pnpm test` | Lancer les tests du pipeline |
 | `pnpm build` | Construire l’application |
+| `pnpm validate:news` | Vérifier que chaque news possède une source et un lien officiel |
 | `pnpm radar:dry-run` | Tester les flux sans écrire |
 | `pnpm radar:now` | Lancer une collecte immédiate |
 

@@ -30,7 +30,8 @@ export function slugify(value: string) {
 export function normalizeItem(item: FeedItem, source: string, topic: string): NormalizedSignal | null {
   const title = cleanText(item.title)
   const link = cleanUrl(item.link)
-  if (!title || !link) return null
+  const sourceName = cleanText(source)
+  if (!title || !link || !sourceName) return null
   const publishedAt = new Date(item.publishedAt)
   return {
     ...item,
@@ -39,7 +40,7 @@ export function normalizeItem(item: FeedItem, source: string, topic: string): No
     link,
     publishedAt: Number.isNaN(publishedAt.getTime()) ? new Date().toISOString() : publishedAt.toISOString(),
     slug: slugify(title),
-    source,
+    source: sourceName,
     topic,
     tags: [slugify(topic)],
   }
@@ -65,7 +66,14 @@ export function deduplicate(items: NormalizedSignal[]) {
 }
 
 export function renderSignalMarkdown(signal: NormalizedSignal) {
+  if (!signal.source.trim() || !isValidSourceUrl(signal.link)) {
+    throw new Error(`Cannot render a Signal without a valid official source: ${signal.title}`)
+  }
   return `---\ntitle: ${yamlQuote(signal.title)}\nsource: ${yamlQuote(signal.source)}\ntopic: ${yamlQuote(signal.topic)}\npublishedAt: ${signal.publishedAt}\nsourceUrl: ${yamlQuote(signal.link)}\ntags: [${signal.tags.map(yamlQuote).join(', ')}]\n---\n\n${signal.description}\n\n[Lire la source originale](${signal.link})\n`
+}
+
+export function isValidSourceUrl(value: string) {
+  return Boolean(cleanUrl(value))
 }
 
 function cleanUrl(value: string) {

@@ -10,7 +10,7 @@ export function SignalList({ signals, compact = false }: { signals: Signal[]; co
         <div className="signal-meta"><span className="topic-mark">{signal.topic}</span><span>{signal.source}</span><span className="meta-separator">/</span><span>{signal.publishedLabel}</span></div>
         <Link className="signal-title" to="/signal/$slug" params={{ slug: signal.slug }}>{signal.title}<ArrowUpRight size={17} /></Link>
         {!compact ? <p className="signal-summary">{signal.summary}</p> : null}
-        <div className="signal-tags"><span><Clock size={14} /> {signal.readingTime}</span>{signal.tags.slice(0, 3).map((tag) => <span key={tag}><Hash size={13} /> {tag}</span>)}</div>
+        <div className="signal-tags"><span><Clock size={14} /> {signal.readingTime}</span>{signal.tags.slice(0, 3).map((tag) => <span key={tag}><Hash size={13} /> {tag}</span>)}<a className="signal-source-link" href={signal.sourceUrl} target="_blank" rel="noreferrer"><ArrowUpRight size={13} /> Article officiel</a></div>
       </div>
       <div className="signal-score" aria-label={`Bornage ${signal.topicSlug.toUpperCase()}`}><span>{signal.topicSlug.toUpperCase()}</span><small>bornage</small></div>
     </article>)}

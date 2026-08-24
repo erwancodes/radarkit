@@ -26,6 +26,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm radar -- --scheduled
+      - run: pnpm validate:news
       - name: Commit new Signals
         run: |
           if git diff --quiet -- content/news; then

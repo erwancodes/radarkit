@@ -8,6 +8,8 @@ describe('RadarKit core', () => {
 
   it('drops unsafe or incomplete feed items during normalization', () => {
     expect(normalizeItem({ title: '', description: '', link: 'javascript:alert(1)', publishedAt: '' }, 'Test', 'AI')).toBeNull()
+    expect(normalizeItem({ title: 'A signal', description: '', link: '', publishedAt: '2026-08-24' }, 'Test', 'AI')).toBeNull()
+    expect(normalizeItem({ title: 'A signal', description: '', link: 'https://example.com/signal', publishedAt: '2026-08-24' }, '', 'AI')).toBeNull()
     expect(normalizeItem({ title: 'A signal', description: '<b>Useful</b>', link: 'https://example.com/signal', publishedAt: '2026-08-24' }, 'Test', 'AI')?.description).toBe('Useful')
   })
 
@@ -21,6 +23,7 @@ describe('RadarKit core', () => {
     const signal = normalizeItem({ title: 'A signal', description: 'Read this.', link: 'https://example.com/a', publishedAt: '2026-08-24' }, 'Test', 'AI')!
     const markdown = renderSignalMarkdown(signal)
     expect(markdown).toContain("title: 'A signal'")
+    expect(markdown).toContain("sourceUrl: 'https://example.com/a'")
     expect(markdown).toContain('[Lire la source originale](https://example.com/a)')
   })
 

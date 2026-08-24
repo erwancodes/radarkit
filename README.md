@@ -38,6 +38,8 @@ Open `http://localhost:3000`.
 
 The UI starts empty on purpose. The first real run writes Markdown into `content/news`, and the reader imports those files at build time.
 
+Every Signal must include a non-empty `source` and a valid HTTP(S) `sourceUrl` pointing directly to the official article. The **Official article** link is available from the feed row and the Signal page.
+
 ## Commands
 
 | Command | Purpose |
@@ -46,6 +48,7 @@ The UI starts empty on purpose. The first real run writes Markdown into `content
 | `pnpm build` | Build the TanStack Start app |
 | `pnpm lint` | Run TypeScript checks |
 | `pnpm test` | Run core pipeline tests |
+| `pnpm validate:news` | Verify every Markdown Signal has a source and official article URL |
 | `pnpm radar:dry-run` | Fetch and report without writing |
 | `pnpm radar:now` | Fetch and write Markdown Signals immediately |
 | `pnpm radar` | Fetch and write Markdown Signals |

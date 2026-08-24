@@ -31,7 +31,7 @@ function parseSignal(raw: string, filePath: string): Signal | null {
   const topicCode = metadata.topic
   const sourceUrl = metadata.sourceUrl
   const publishedAt = metadata.publishedAt
-  if (!title || !source || !topicCode || !sourceUrl || !publishedAt) return null
+  if (!title || !source || !topicCode || !isValidSourceUrl(sourceUrl) || !publishedAt) return null
 
   const paragraphs = body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean)
   const slug = filePath.split('/').pop()?.replace(/\.md$/, '') ?? slugify(title)
@@ -55,6 +55,16 @@ function parseSignal(raw: string, filePath: string): Signal | null {
     publishedLabel: formatPublishedLabel(publishedAt),
     readingTime: `${Math.max(1, Math.ceil(words / 220))} min de lecture`,
     isSynthetic: false,
+  }
+}
+
+function isValidSourceUrl(value: string | undefined) {
+  if (!value) return false
+  try {
+    const url = new URL(value)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
   }
 }
 

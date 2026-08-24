@@ -13,6 +13,7 @@ Before opening a pull request, run:
 pnpm lint
 pnpm test
 pnpm build
+pnpm validate:news
 ```
 
 ## Add a source
@@ -22,6 +23,8 @@ Add a source to `radarkit.config.ts` with a stable name, a public RSS or Atom UR
 ## Add a feed type
 
 Put normalization and safety logic in `scripts/core.ts`, cover it with a focused Vitest test, and keep the failure of one source isolated from the rest of the run.
+
+Every Markdown Signal must include a non-empty `source` and a valid HTTP(S) `sourceUrl` pointing to the official article. The `validate:news` check is part of CI and the scheduled radar workflow.
 
 ## Pull requests
 
