@@ -2,6 +2,8 @@
 
 Open-source robotics intelligence radar.
 
+[Version française](README.fr.md)
+
 RadarKit turns a focused robotics watchlist into a daily, searchable feed of Signals stored as Markdown in Git. The scope is intentionally narrow: no database, authentication, admin panel, or required AI key.
 
 ## Features

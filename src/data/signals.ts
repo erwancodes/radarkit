@@ -25,7 +25,7 @@ function parseSignal(raw: string, filePath: string): Signal | null {
   if (!match) return null
 
   const metadata = parseFrontmatter(match[1])
-  const body = match[2].replace(/\n*\[Read the original source\]\([^)]*\)\s*$/i, '').trim()
+  const body = match[2].replace(/\n*\[(?:Read the original source|Lire la source originale)\]\([^)]*\)\s*$/i, '').trim()
   const title = metadata.title
   const source = metadata.source
   const topicCode = metadata.topic

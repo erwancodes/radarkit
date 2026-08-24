@@ -65,7 +65,7 @@ export function deduplicate(items: NormalizedSignal[]) {
 }
 
 export function renderSignalMarkdown(signal: NormalizedSignal) {
-  return `---\ntitle: ${yamlQuote(signal.title)}\nsource: ${yamlQuote(signal.source)}\ntopic: ${yamlQuote(signal.topic)}\npublishedAt: ${signal.publishedAt}\nsourceUrl: ${yamlQuote(signal.link)}\ntags: [${signal.tags.map(yamlQuote).join(', ')}]\n---\n\n${signal.description}\n\n[Read the original source](${signal.link})\n`
+  return `---\ntitle: ${yamlQuote(signal.title)}\nsource: ${yamlQuote(signal.source)}\ntopic: ${yamlQuote(signal.topic)}\npublishedAt: ${signal.publishedAt}\nsourceUrl: ${yamlQuote(signal.link)}\ntags: [${signal.tags.map(yamlQuote).join(', ')}]\n---\n\n${signal.description}\n\n[Lire la source originale](${signal.link})\n`
 }
 
 function cleanUrl(value: string) {

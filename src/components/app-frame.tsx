@@ -42,7 +42,7 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
           <span className="brand-mark"><Broadcast weight="bold" size={20} /></span>
           <span>RadarKit</span>
         </Link>
-        <nav className="topbar-nav" aria-label="Primary navigation">
+        <nav className="topbar-nav" aria-label="Navigation principale">
           {navItems.map((item) => {
             const isActive = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to)
             return <Link key={item.label} className={`nav-link ${isActive ? 'is-active' : ''}`} to={item.to}>{item.label}</Link>

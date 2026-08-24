@@ -21,7 +21,7 @@ describe('RadarKit core', () => {
     const signal = normalizeItem({ title: 'A signal', description: 'Read this.', link: 'https://example.com/a', publishedAt: '2026-08-24' }, 'Test', 'AI')!
     const markdown = renderSignalMarkdown(signal)
     expect(markdown).toContain("title: 'A signal'")
-    expect(markdown).toContain('[Read the original source](https://example.com/a)')
+    expect(markdown).toContain('[Lire la source originale](https://example.com/a)')
   })
 
   it('keeps only signals inside the selected robotics boundary', () => {

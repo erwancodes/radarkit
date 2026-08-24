@@ -3,7 +3,7 @@ export function formatTopicSlug(value: string) {
 }
 
 export function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
+  return new Intl.DateTimeFormat('fr-FR', {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
