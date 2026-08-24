@@ -1,14 +1,16 @@
 # RadarKit
 
-Open-source automated intelligence radar.
+Open-source robotics intelligence radar.
 
-RadarKit turns the sources you follow into a daily, searchable feed of Signals stored as Markdown in Git. It is intentionally small: no database, authentication, admin panel, or required AI key.
+RadarKit turns a focused robotics watchlist into a daily, searchable feed of Signals stored as Markdown in Git. The scope is intentionally narrow: no database, authentication, admin panel, or required AI key.
 
 ## Features
 
 - RSS and Atom collection with per-source failure isolation
 - Normalization, URL/title deduplication, safe Markdown generation
 - Text-first reader with search, topic filters, source filters, archive, and RSS output
+- Two explicit watch boundaries: humanoid robotics startups/open source and World Models for robotics
+- Keyword and exclusion filtering before Markdown is written
 - Optional AI boundary, disabled by default
 - GitHub Actions schedule that respects `Europe/Paris` daylight saving time
 - TanStack Start, React, TypeScript, Tailwind CSS, and Vercel-ready build
@@ -26,13 +28,13 @@ Open `http://localhost:3000`.
 
 ## Configure your radar
 
-1. Edit `radarkit.config.ts` to add or remove RSS/Atom sources.
-2. Add topic metadata in `src/data/topics.ts`.
+1. Edit `radarkit.config.ts` to add or remove robotics RSS/Atom sources.
+2. Keep the two boundary labels in `src/data/topics.ts` aligned with the watch brief.
 3. Run `pnpm radar:dry-run` to fetch without writing files.
 4. Run `pnpm radar:now` to generate Markdown in `content/news` immediately.
 5. Enable `.github/workflows/daily-radar.yml` after forking.
 
-The UI includes synthetic Signals so a fresh fork has a useful first screen. Replace them with generated Markdown as soon as the first radar run completes.
+The UI starts empty on purpose. The first real run writes Markdown into `content/news`, and the reader imports those files at build time.
 
 ## Commands
 
@@ -66,7 +68,7 @@ When the report looks correct, launch a real collection immediately:
 pnpm radar:now
 ```
 
-This writes new files to `content/news`. Inspect the result with:
+This writes only items matching B1 or B2 to `content/news`. Inspect the result with:
 
 ```powershell
 Get-ChildItem content/news | Select-Object -First 10

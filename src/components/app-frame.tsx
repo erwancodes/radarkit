@@ -8,10 +8,10 @@ import { signals } from '../data/signals'
 type Theme = 'light' | 'dark' | 'system'
 
 const navItems = [
-  { label: 'Today', to: '/' as const },
-  { label: 'Topics', to: '/topics' as const },
+  { label: 'Radar', to: '/' as const },
+  { label: 'Bornages', to: '/topics' as const },
   { label: 'Sources', to: '/sources' as const },
-  { label: 'About', to: '/about' as const },
+  { label: 'Périmètre', to: '/about' as const },
 ]
 
 export function AppFrame({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,7 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <Link className="brand" to="/" aria-label="RadarKit home">
+        <Link className="brand" to="/" aria-label="Accueil RadarKit">
           <span className="brand-mark"><Broadcast weight="bold" size={20} /></span>
           <span>RadarKit</span>
         </Link>
@@ -49,21 +49,21 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
           })}
         </nav>
         <div className="topbar-actions">
-          <button className="icon-button" type="button" aria-label="Search signals" onClick={() => setSearchOpen(true)}>
+          <button className="icon-button" type="button" aria-label="Rechercher un signal" onClick={() => setSearchOpen(true)}>
             <MagnifyingGlass size={19} />
           </button>
-          <a className="icon-button" href="https://github.com/erwancodes/radarkit" target="_blank" rel="noreferrer" aria-label="Open RadarKit on GitHub">
+          <a className="icon-button" href="https://github.com/erwancodes/radarkit" target="_blank" rel="noreferrer" aria-label="Ouvrir RadarKit sur GitHub">
             <GithubLogo size={19} />
           </a>
-          <button className="icon-button theme-button" type="button" aria-label={`Switch to ${nextTheme} theme`} onClick={() => setTheme(nextTheme)}>
+          <button className="icon-button theme-button" type="button" aria-label={`Passer au thème ${nextTheme}`} onClick={() => setTheme(nextTheme)}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
       </header>
       <main>{children}</main>
       <footer className="site-footer">
-        <div><span className="footer-signal" /> RadarKit / built in the open</div>
-        <div className="footer-links"><Link to="/archive">Archive</Link><a href="/feed.xml">RSS</a><Link to="/about">About</Link></div>
+        <div><span className="footer-signal" /> RadarKit / construit ouvertement</div>
+        <div className="footer-links"><Link to="/archive">Archive</Link><a href="/feed.xml">RSS</a><Link to="/about">Périmètre</Link></div>
       </footer>
       {searchOpen ? <SearchOverlay onClose={() => setSearchOpen(false)} /> : null}
     </div>
@@ -82,17 +82,17 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
 
-  return <div className="search-overlay" role="dialog" aria-modal="true" aria-label="Search signals">
-    <button className="search-backdrop" type="button" aria-label="Close search" onClick={onClose} />
+  return <div className="search-overlay" role="dialog" aria-modal="true" aria-label="Rechercher dans le radar">
+    <button className="search-backdrop" type="button" aria-label="Fermer la recherche" onClick={onClose} />
     <div className="search-panel">
-      <div className="search-heading"><span>Search the radar</span><kbd>ESC</kbd></div>
-      <div className="search-input-wrap"><MagnifyingGlass size={20} /><input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try ‘inference’, ‘NASA’, or ‘Dev’" /></div>
+      <div className="search-heading"><span>Rechercher dans le radar</span><kbd>ESC</kbd></div>
+      <div className="search-input-wrap"><MagnifyingGlass size={20} /><input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ex. humanoïde, simulation, NVIDIA" /></div>
       <div className="search-results">
         {results.map((signal) => <Link key={signal.slug} to="/signal/$slug" params={{ slug: signal.slug }} onClick={onClose} className="search-result">
           <span className="result-topic">{signal.topic}</span><span className="result-title">{signal.title}</span><span className="result-arrow"><ArrowUpRight size={16} /></span>
         </Link>)}
-        {query && results.length === 0 ? <p className="search-empty">No signal matches that search.</p> : null}
-        {!query ? <p className="search-hint">Search titles, descriptions, sources, topics, and tags.</p> : null}
+        {query && results.length === 0 ? <p className="search-empty">Aucun signal ne correspond à cette recherche.</p> : null}
+        {!query ? <p className="search-hint">Titres, descriptions, sources, bornages et tags.</p> : null}
       </div>
     </div>
   </div>

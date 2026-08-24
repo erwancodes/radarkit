@@ -182,4 +182,4 @@ The signature component is a punched selection rail: fixed cells, numeric counts
 - **Don't** add neon gradients, decorative glass, or a second accent color.
 - **Don't** use rounded cards as the default container language.
 - **Don't** hide source provenance behind a secondary interaction.
-- **Don't** treat synthetic Signals as production data; label them until the radar has generated real Markdown.
+- **Don't** fill the empty radar with invented content; keep the first-run state explicit until real Markdown exists.

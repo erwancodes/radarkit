@@ -12,6 +12,11 @@ export type NormalizedSignal = FeedItem & {
   tags: string[]
 }
 
+export type ScopeRule = {
+  keywords: readonly string[]
+  exclusions: readonly string[]
+}
+
 export function slugify(value: string) {
   return value
     .normalize('NFKD')
@@ -38,6 +43,13 @@ export function normalizeItem(item: FeedItem, source: string, topic: string): No
     topic,
     tags: [slugify(topic)],
   }
+}
+
+export function matchesScope(signal: NormalizedSignal, scope: ScopeRule) {
+  const haystack = `${signal.title} ${signal.description} ${signal.source}`.toLocaleLowerCase()
+  const matchesKeyword = scope.keywords.some((keyword) => haystack.includes(keyword.toLocaleLowerCase()))
+  const matchesExclusion = scope.exclusions.some((keyword) => haystack.includes(keyword.toLocaleLowerCase()))
+  return matchesKeyword && !matchesExclusion
 }
 
 export function deduplicate(items: NormalizedSignal[]) {

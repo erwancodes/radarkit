@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { radarConfig, type RadarSourceConfig } from '../radarkit.config'
-import { deduplicate, normalizeItem, renderSignalMarkdown, type FeedItem, type NormalizedSignal } from './core'
+import { radarConfig, radarScopes, type RadarSourceConfig } from '../radarkit.config'
+import { deduplicate, matchesScope, normalizeItem, renderSignalMarkdown, type FeedItem, type NormalizedSignal } from './core'
 
 const isDryRun = process.argv.includes('--dry-run')
 const isScheduled = process.argv.includes('--scheduled')
@@ -23,9 +23,10 @@ for (const source of radarConfig.sources) {
     const xml = await fetchFeed(source)
     const feedItems = parseFeed(xml)
     const normalized = feedItems.map((item) => normalizeItem(item, source.name, source.topic)).filter((item): item is NonNullable<typeof item> => Boolean(item))
-    allItems.push(...normalized)
+    const scoped = normalized.filter((item) => matchesScope(item, radarScopes[source.scope]))
+    allItems.push(...scoped)
     successful += 1
-    console.log(`✓ ${source.name} — ${normalized.length} items`)
+    console.log(`✓ ${source.name} — ${scoped.length} items in ${source.topic} (${normalized.length - scoped.length} hors périmètre)`)
   } catch (error) {
     failed += 1
     console.error(`✗ ${source.name} — ${error instanceof Error ? error.message : 'unknown error'}`)

@@ -12,7 +12,7 @@ export function SignalList({ signals, compact = false }: { signals: Signal[]; co
         {!compact ? <p className="signal-summary">{signal.summary}</p> : null}
         <div className="signal-tags"><span><Clock size={14} /> {signal.readingTime}</span>{signal.tags.slice(0, 3).map((tag) => <span key={tag}><Hash size={13} /> {tag}</span>)}</div>
       </div>
-      <div className="signal-score" aria-label={`Relevance score ${signal.relevanceScore} out of 100`}><span>{signal.relevanceScore}</span><small>score</small></div>
+      <div className="signal-score" aria-label={`Bornage ${signal.topicSlug.toUpperCase()}`}><span>{signal.topicSlug.toUpperCase()}</span><small>bornage</small></div>
     </article>)}
   </div>
 }

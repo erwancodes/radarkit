@@ -16,7 +16,7 @@ Developers, researchers, and technically curious readers who want to follow a fo
 
 ## Product Purpose
 
-RadarKit turns configured information sources into a daily, searchable feed of Signals stored as Markdown files in Git. Success means a person can fork the repository, edit their sources and topics, run the radar, and read the resulting feed from a lightweight web interface.
+RadarKit turns a focused robotics watchlist into a daily, searchable feed of Signals stored as Markdown files in Git. Success means the reader can distinguish the two explicit watch boundaries, trace each signal to its source, and keep the collection inspectable.
 
 ## Positioning
 
@@ -28,13 +28,18 @@ Users configure sources in repository files, run the collection pipeline locally
 
 ## Capabilities and Constraints
 
-- Signals are normalized, deduplicated, categorized, and written as Markdown with frontmatter.
+- Signals are normalized, scope-filtered, deduplicated, categorized, and written as Markdown with frontmatter.
 - The frontend reads Markdown content and supports home feed, Signal detail, Topics, topic detail, Sources, Archive, About, search, and lightweight filters.
 - The MVP has no database, authentication, admin panel, payment system, or required AI provider.
 - AI is an optional provider abstraction controlled by environment variables and must not be called when disabled.
-- The core vocabulary is Signal, Topic, Source, and Radar; avoid collapsing every concept into article.
+- The core vocabulary is Signal, Boundary, Source, and Radar; avoid collapsing every concept into article.
 - The daily workflow should run at 05:00 Europe/Paris, support manual dispatch, tolerate individual feed failures, and avoid empty commits.
-- External content must be validated and cleaned before it is persisted.
+- External content must be validated, cleaned, and checked against the robotics scope before it is persisted.
+
+## Robotics watch brief
+
+- **B1 — Startups robotique & open source humanoïde:** startups, spin-offs, open platforms, components, and industrialization. Excludes military robotics and toys or consumer products without industrial relevance.
+- **B2 — World Models IA pour la robotique:** world models, physical AI, high-fidelity simulation, synthetic data, robot learning, and reinforcement learning. Excludes general-purpose LLM coverage without a robotics link.
 
 ## Brand Commitments
 
@@ -42,7 +47,7 @@ The product name is RadarKit. The project is open source, developer-friendly, so
 
 ## Evidence on Hand
 
-The supplied project specification is the source of product truth. No production feed data, logo asset, testimonials, or external proof were supplied; illustrative Signals in the MVP must be treated as synthetic demonstration content.
+The supplied project specification and the robotics watch brief are the source of product truth. The repository intentionally starts without feed data; the first real radar run is the first content proof.
 
 ## Product Principles
 

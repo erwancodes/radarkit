@@ -1,8 +1,9 @@
 export type Topic = {
   slug: string
   name: string
+  shortName?: string
   description: string
-  count: number
+  count?: number
   accent: string
 }
 
@@ -14,7 +15,7 @@ export type Source = {
   signalCount: number
   lastChecked: string
   url: string
-  status: 'healthy' | 'watch'
+  status: 'healthy' | 'watch' | 'idle'
 }
 
 export type Signal = {
@@ -31,6 +32,6 @@ export type Signal = {
   publishedAt: string
   publishedLabel: string
   readingTime: string
-  relevanceScore: number
+  relevanceScore?: number
   isSynthetic: boolean
 }

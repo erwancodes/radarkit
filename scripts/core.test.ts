@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deduplicate, normalizeItem, renderSignalMarkdown, slugify } from './core'
+import { deduplicate, matchesScope, normalizeItem, renderSignalMarkdown, slugify } from './core'
 
 describe('RadarKit core', () => {
   it('creates stable, readable slugs', () => {
@@ -22,5 +22,13 @@ describe('RadarKit core', () => {
     const markdown = renderSignalMarkdown(signal)
     expect(markdown).toContain("title: 'A signal'")
     expect(markdown).toContain('[Read the original source](https://example.com/a)')
+  })
+
+  it('keeps only signals inside the selected robotics boundary', () => {
+    const inScope = normalizeItem({ title: 'Open-source humanoid robot platform', description: 'A modular robot for industrial research.', link: 'https://example.com/robot', publishedAt: '2026-08-24' }, 'Robotics source', 'B1')!
+    const excluded = normalizeItem({ title: 'A toy robot for home entertainment', description: 'A consumer gadget.', link: 'https://example.com/toy', publishedAt: '2026-08-24' }, 'Robotics source', 'B1')!
+    const scope = { keywords: ['robot', 'humanoid', 'open source'], exclusions: ['toy robot', 'consumer'] }
+    expect(matchesScope(inScope, scope)).toBe(true)
+    expect(matchesScope(excluded, scope)).toBe(false)
   })
 })
